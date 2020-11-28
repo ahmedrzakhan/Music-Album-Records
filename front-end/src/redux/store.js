@@ -18,5 +18,3 @@ if (process.env.NODE_ENV !== "production") {
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 export const store = createStore(rootReducer, enhancer);
-
-console.log(store.getState());

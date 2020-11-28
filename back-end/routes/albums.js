@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Album = require("./../models/Album");
-const { getAlbums } = require("./../controllers/albums-controller")
+const {
+  getAlbums,
+  getAlbumsBySearch,
+} = require("./../controllers/albums-controller");
 
-router.get("/get-albums", getAlbums)
+router.get("/get-albums", getAlbums);
 
-module.exports = router
+router.get("/get-albums-by-search", getAlbumsBySearch);
+
+module.exports = router;

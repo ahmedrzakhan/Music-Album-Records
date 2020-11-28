@@ -31,8 +31,29 @@ const getAlbums = async (req, res) => {
   }
 
   const count = await Album.countDocuments().exec();
+  const numOfAlbums = albums.length;
   const totalPages = Math.ceil(count / limit);
-  res.status(200).send({ albums, totalPages });
+  res.send({ albums, totalPages, numOfAlbums });
 };
 
-module.exports = { getAlbums };
+// Search
+const getAlbumsBySearch = async (req, res) => {
+  let { query, page, limit } = req.query;
+
+  page = Number(page);
+  limit = Number(limit);
+
+  const albums = await Album.find({
+    album: { $regex: query, $options: "i" },
+  })
+    .skip((page - 1) * limit)
+    .limit(limit);
+
+  const count = await Album.countDocuments().exec();
+  const numOfAlbums = albums.length;
+  const totalPages = Math.ceil(count / limit);
+
+  res.send({ albums, numOfAlbums, totalPages });
+};
+
+module.exports = { getAlbums, getAlbumsBySearch };

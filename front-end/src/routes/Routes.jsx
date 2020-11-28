@@ -5,7 +5,7 @@ import Dashboard from "../components/dashboard/Dashboard";
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/" exact render={() => <Dashboard />} />
+      <Route path="/dashboard" exact render={(props) => <Dashboard {...props}/>} />
     </Switch>
   );
 };
