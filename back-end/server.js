@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+// Routes
+const albumsRoute = require("./routes/albums");
+
 const Album = require("./models/Album");
 const { albums } = require("./data/albums");
 
@@ -9,7 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use("/api/albums", albumsRoute);
 mongoose.connect(
   process.env.ATLAS_URI,
   {
